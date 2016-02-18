@@ -15,13 +15,14 @@
 
 old_file = ARGV.first
 new_file = File.basename(old_file, '.*') + '.new'
+cards = []
 
-File.open(new_file,'w') do |output|
-
-  File.open(old_file, 'r') do |input|
-
-    input.each_line.each_slice(2) do |definition, term|
-      output << "#{term.chomp}\t#{definition.chomp}\n"
-    end
+File.open(old_file, 'r') do |f|
+  f.each_line.each_slice(2) do |definition, term|
+    cards << "#{term.chomp}\t#{definition.chomp}\n"
   end
+end
+
+File.open(new_file,'w') do |f|
+  f.puts(cards.sort)
 end
