@@ -23,17 +23,22 @@ require 'optparse'
 
 def write_cards_to_file(file, cards=[], sort=true)
   File.open(file,'w') do |f|
-    f.puts sort ? cards.sort : cards
+    f.puts sort ? cards.sort { |x,y| noise_free(x) <=> noise_free(y) } : cards
   end
 end
 
 def file_name(part_a, part_b, part_c)
-  part_a + '_' + part_b + '_' + part_c + '.fc'
+  part_a + '_to_' + part_b + '_' + part_c + '.fc'
+end
+
+def noise_free(term)
+  noise = %w(la el las los de del a)
+  term.split.delete_if { |w| noise.include?(w) }.first
 end
 
 options = {
   list: %w(spanish english),
-  sort: false
+  sort: true
 }
 
 optparse = OptionParser.new do |opts|
@@ -71,12 +76,12 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
 end
 
 a_cards = []
-b_cards = []
+z_cards = []
 
 File.open(options[:file], 'r') do |f|
   f.each_line.each_slice(2) do |term, definition|
-    a_cards << "#{definition.chomp}\t#{term.chomp}\n"
-    b_cards << "#{term.chomp}\t#{definition.chomp}\n"
+    a_cards << "#{term.chomp}\t#{definition.chomp}\n"
+    z_cards << "#{definition.chomp}\t#{term.chomp}\n"
   end
 end
 
@@ -88,4 +93,4 @@ write_cards_to_file file_name(options[:list].first,
 write_cards_to_file file_name(options[:list].last,
                               options[:list].first,
                               File.basename(options[:file], '.*')
-                             ), b_cards, options[:sort]
+                             ), z_cards, options[:sort]
