@@ -38,7 +38,7 @@ end
 
 options = {
   list: %w(spanish english),
-  sort: true
+  sort: false
 }
 
 optparse = OptionParser.new do |opts|
