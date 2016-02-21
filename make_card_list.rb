@@ -79,9 +79,11 @@ a_cards = []
 z_cards = []
 
 File.open(options[:file], 'r') do |f|
-  f.each_line.each_slice(2) do |term, definition|
-    a_cards << "#{term.chomp}\t#{definition.chomp}\n"
-    z_cards << "#{definition.chomp}\t#{term.chomp}\n"
+  f.each_line.each_slice(2) do |terms, definition|
+    terms.split(',').each do |term|
+      a_cards << "#{term.strip}\t#{definition.strip}\n"
+    end
+    z_cards << "#{definition.strip}\t#{terms.strip}\n"
   end
 end
 
