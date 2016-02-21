@@ -19,6 +19,11 @@
 #
 #   spanish term<tab>english term
 #
+# Where there are two spanish terms for the english equivalent
+# we produce two lines in the spanish file but just the one in t'other.
+#
+# Note: language that comes first is set by `list` option which defaults
+# to spanish but depending on word source can be anything
 
 require 'optparse'
 
@@ -33,7 +38,7 @@ def file_name(part_a, part_b, part_c)
 end
 
 def noise_free(term)
-  noise = %w(la el las los de del a)
+  noise = %w(a al de del el la las los the)
   term.split.delete_if { |w| noise.include?(w) }.first
 end
 
