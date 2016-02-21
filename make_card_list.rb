@@ -19,8 +19,8 @@
 #
 #   spanish term<tab>english term
 #
-# Where there are two spanish terms for the english equivalent
-# we produce two lines in the spanish file but just the one in t'other.
+# Where there are two terms listed (separation by a ',')
+# we produce combinations for each referencing the original.
 #
 # Note: language that comes first is set by `list` option which defaults
 # to spanish but depending on word source can be anything
@@ -85,11 +85,13 @@ a_cards = []
 z_cards = []
 
 File.open(options[:file], 'r') do |f|
-  f.each_line.each_slice(2) do |terms, definition|
+  f.each_line.each_slice(2) do |terms, definitions|
     terms.split(',').each do |term|
-      a_cards << "#{term.strip}\t#{definition.strip}\n"
+      a_cards << "#{term.strip}\t#{definitions.strip}\n"
     end
-    z_cards << "#{definition.strip}\t#{terms.strip}\n"
+    definitions.split(',') do |definition|
+      z_cards << "#{definition.strip}\t#{terms.strip}\n"
+    end
   end
 end
 
