@@ -7,6 +7,7 @@
 # http://www.cram.com/flashcards/create
 #
 # Original list is alternating lines of
+#
 #   spanish word
 #   english equivalent
 #
