@@ -11,7 +11,7 @@ el armadillo	armadillo
 la ballena	whale
 el bisonte	bison
 el burro	donkey
-el búho, la lechuza	owl
+el búho	owl
 el caballo	horse
 el caimán	alligator
 el camaleón	chameleon
@@ -43,6 +43,7 @@ la hormiga	ant
 la iguana	iguana
 la jirafa	giraffe
 la lagartija	lizard
+la lechuza	owl
 el león	lion
 la libélula	dragonfly
 la llama	llama
@@ -63,8 +64,8 @@ el pez espada	swordfish
 el pico	beak
 el pingüino	penguin
 la pluma	feather
-el pájaro azul	blue jay
 el pájaro carpintero	woodpecker
+el pájaro azul	blue jay
 la rana	frog
 la rata	rat
 el ratón	mouse
