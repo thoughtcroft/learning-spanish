@@ -89,7 +89,7 @@ File.open(options[:file], 'r') do |f|
     terms.split(',').each do |term|
       a_cards << "#{term.strip}\t#{definitions.strip}\n"
     end
-    definitions.split(',') do |definition|
+    definitions.split(',').each do |definition|
       z_cards << "#{definition.strip}\t#{terms.strip}\n"
     end
   end
