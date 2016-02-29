@@ -43,6 +43,7 @@ def noise_free(term)
 end
 
 options = {
+  div:  ',',
   list: %w(spanish english),
   sort: false
 }
@@ -53,9 +54,10 @@ optparse = OptionParser.new do |opts|
   opts.separator ""
   opts.separator "Specific options:"
 
-  opts.on("-f", "--file FILE", "Input file to be converted", "=MANDATORY")  { |f| options[:file] = f }
-  opts.on("-s", "--[no-]sort", "Sort output files by terms")                { |s| options[:sort] = s }
-  opts.on("-l", "--list a,b", Array, "Language terms order in file")        { |l| options[:list] = l }
+  opts.on("-d", "--div STRING", "Divider for separating terms")            { |d| options[:div] = d }
+  opts.on("-f", "--file FILE", "Input file to be converted", "=MANDATORY") { |f| options[:file] = f }
+  opts.on("-s", "--[no-]sort", "Sort output files by terms")               { |s| options[:sort] = s }
+  opts.on("-l", "--list a,b", Array, "Language terms order in file")       { |l| options[:list] = l }
 
   opts.separator ""
   opts.separator "Common options:"
@@ -86,10 +88,10 @@ z_cards = []
 
 File.open(options[:file], 'r') do |f|
   f.each_line.each_slice(2) do |terms, definitions|
-    terms.split(',').each do |term|
+    terms.split(options[:div]).each do |term|
       a_cards << "#{term.strip}\t#{definitions.strip}\n"
     end
-    definitions.split(',').each do |definition|
+    definitions.split(options[:div]).each do |definition|
       z_cards << "#{definition.strip}\t#{terms.strip}\n"
     end
   end
