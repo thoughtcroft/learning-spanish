@@ -56,8 +56,8 @@ optparse = OptionParser.new do |opts|
 
   opts.on("-d", "--div STRING", "Divider for separating terms")            { |d| options[:div] = d }
   opts.on("-f", "--file FILE", "Input file to be converted", "=MANDATORY") { |f| options[:file] = f }
-  opts.on("-s", "--[no-]sort", "Sort output files by terms")               { |s| options[:sort] = s }
   opts.on("-l", "--list a,b", Array, "Language terms order in file")       { |l| options[:list] = l }
+  opts.on("-s", "--[no-]sort", "Sort output files by terms")               { |s| options[:sort] = s }
 
   opts.separator ""
   opts.separator "Common options:"
